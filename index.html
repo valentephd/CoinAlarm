@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoinAlarm</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h1>CoinAlarm</h1>
+    
+    <button type="button" onclick="verificarAlarmes()">Verificar Alarmes</button>
+
+    <br><br>
+    <form id="alarmForm">
+        <label for="codeCripto">Tipo da Moeda:</label>
+        <select id="codeCripto" name="codeCripto" required>
+            <option value="">Escolha uma moeda</option>
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+            <option value="LTC">LTC</option>
+        </select>
+        <br><br>
+        <label for="targetValue">Valor do Alarme (em BRL):</label>
+        <input type="text" id="targetValue" name="targetValue" placeholder="500" required>
+        <br><br>
+        <button type="button" onclick="cadastrarAlarme()">Cadastrar Alarme</button>
+    </form>
+
+    <h2>Alarmes Cadastrados</h2>
+    <ul id="listaAlarmes">
+        <!-- Alarmes serão exibidos aqui -->
+    </ul>
+
+    <script src="app.js"></script>
+</body>
+</html>
