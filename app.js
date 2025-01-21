@@ -2,9 +2,12 @@ const somAlarme = new Audio('assets/alarme.mp3');
 
 // Exemplo do array global de preços de criptomoedas
 const precosCriptos = [
-    { codigoMoeda: "BTC", valorAtual: 5 },
-    { codigoMoeda: "ETH", valorAtual: 1234 },
-    { codigoMoeda: "LTC", valorAtual: 0 }
+    { codigoMoeda: "BTC", valorAtual: 0 },
+    { codigoMoeda: "ETH", valorAtual: 0 },
+    { codigoMoeda: "LTC", valorAtual: 0 },
+    { codigoMoeda: "BCH", valorAtual: 0 },
+    { codigoMoeda: "DOT", valorAtual: 0 },
+    { codigoMoeda: "AAVE", valorAtual: 0 }
 ]
 
 window.onload = exibirAlarmes()
