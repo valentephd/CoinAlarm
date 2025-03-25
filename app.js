@@ -84,26 +84,32 @@ function verificarAlarmes() {
     alarmes.forEach(alarme => {
         const precoCripto = precosCriptos.find(cripto => cripto.codigoMoeda === alarme.codigoMoeda);
 
-        if (precoCripto && precoCripto.valorAtual >= alarme.valorAlvo) {
-            console.log(`Alarme atingido para ${alarme.codigoMoeda}. Valor atual: R$ ${precoCripto.valorAtual} é maior que o valor alvo esperado: R$ ${alarme.valorAlvo}`);
-            somAlarme.play();
+        if (precoCripto) {
+            const alarmeItem = document.getElementById(`alarme-${alarme.id}`);
+            if (alarmeItem) {
+                // Verifica se já existe um <span> no alarme
+                let simbolo = alarmeItem.querySelector('span');
 
-            const alarmeItem = document.getElementById(`alarme-${alarme.id}`);
-            if (alarmeItem) {
-                const simboloVerde = document.createElement('span');
-                simboloVerde.textContent = '●';
-                simboloVerde.style.color = 'green';
-                simboloVerde.style.marginLeft = '10px'; // Espaço entre o texto e o símbolo
-                alarmeItem.appendChild(simboloVerde);
-            }
-        } else {
-            const alarmeItem = document.getElementById(`alarme-${alarme.id}`);
-            if (alarmeItem) {
-                const simboloVerde = document.createElement('span');
-                simboloVerde.textContent = '●';
-                simboloVerde.style.color = 'gray';
-                simboloVerde.style.marginLeft = '10px'; // Espaço entre o texto e o símbolo
-                alarmeItem.appendChild(simboloVerde);
+                if (!simbolo) {
+                    // Se o <span> não existe, cria um
+                    simbolo = document.createElement('span');
+                    simbolo.style.marginLeft = '10px'; // Espaço entre o texto e o símbolo
+                    alarmeItem.appendChild(simbolo);
+                }
+
+                // Atualiza a cor do <span> com base na condição
+                if (precoCripto.valorAtual >= alarme.valorAlvo) {
+                    simbolo.textContent = '●';
+                    simbolo.style.color = 'green';
+                    console.log(`Alarme atingido para ${alarme.codigoMoeda}. Valor atual: R$ ${precoCripto.valorAtual} é maior que o valor alvo esperado: R$ ${alarme.valorAlvo}`);
+                    somAlarme.play();
+                } else {
+                    simbolo.textContent = '●';
+                    simbolo.style.color = 'gray';
+                }
+
+                // Atualiza o texto do alarme com o preço atual
+                alarmeItem.firstChild.textContent = `Moeda: ${alarme.codigoMoeda}, Valor Alvo: R$ ${alarme.valorAlvo}, Valor Atual: R$ ${precoCripto.valorAtual}`;
             }
         }
     });
