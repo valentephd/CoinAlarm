@@ -1,0 +1,25 @@
+<section id="cryptoPurchase">
+    <h2>Cadastro de Compra de Crypto</h2>
+    <form id="purchaseForm">
+      <label for="currencySelect">Tipo da Moeda:</label>
+      <select id="currencySelect" name="currencySelect" required>
+        <!-- Opções serão preenchidas dinamicamente -->
+      </select>
+      <br><br>
+      <label for="quantityInput">Quantidade:</label>
+      <input type="number" id="quantityInput" name="quantityInput" required>
+      <br><br>
+      <label for="purchaseDateInput">Data da Compra:</label>
+      <input type="date" id="purchaseDateInput" name="purchaseDateInput" required>
+      <br><br>
+      <label for="totalValueInput">Valor da Compra (BRL):</label>
+      <input type="number" id="totalValueInput" name="totalValueInput" required>
+      <br><br>
+      <label for="notesInput">Observações:</label>
+      <textarea id="notesInput" name="notesInput"></textarea>
+      <br><br>
+      <button type="button" onclick="cadastrarCompra()">Cadastrar Compra</button>
+    </form>
+    <div id="purchaseResult"></div>
+  </section>
+  
