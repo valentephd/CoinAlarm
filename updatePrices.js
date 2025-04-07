@@ -1,3 +1,7 @@
+/// TODO: Usar a API do Mercado Bitcoin: https://api.mercadobitcoin.net/api/v4/docs#tag/Public-Data/paths/~1symbols/get
+/// https://api.mercadobitcoin.net/api/v4/symbols
+
+
 // URL da API para consultar os preços
 const API_URL = 'https://economia.awesomeapi.com.br/json/last/';
 
