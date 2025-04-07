@@ -11,7 +11,6 @@
 <body>
   <header>
     <h1>Coin Dashboard</h1>
-    <!-- Novo link para "Cadastrar Criptomoeda" -->
     <nav>
       <ul>
         <li><a href="index.html">Dashboard</a></li>
@@ -69,9 +68,10 @@
       </div>
     </div>
     <div class="bottom-section">
-      <h2>Visão Geral das Cryptos</h2>
-      <!-- Botão para atualizar a tabela -->
-      <button id="atualizarTabelaBtn">🔄 Atualizar Tabela</button>
+      <div class="table-header">
+        <h2>Visão Geral das Cryptos</h2>
+        <button id="atualizarTabelaBtn" title="Atualizar Tabela">🔄</button>
+      </div>
       <table id="cryptoTable">
         <thead>
           <tr>
@@ -79,12 +79,19 @@
             <th>Quantidade Total</th>
             <th>Valor Total Investido (BRL)</th>
             <th>Preço Médio (BRL)</th>
+            <th>Alerta de Preço (BRL)</th>
+            <th>Preço Atual (BRL)</th>
           </tr>
         </thead>
         <tbody>
           <!-- Linhas preenchidas dinamicamente via JS -->
         </tbody>
       </table>
+      <!-- Resumo do Total Investido -->
+       <br />
+       <br />
+       <br />
+      <div id="totalInvestidoResumo"></div>
     </div>
   </main>
   <footer>
@@ -92,8 +99,8 @@
   </footer>
   <script src="js/cryptoPurchaseForm.js"></script>
   <script src="js/cryptoAlarmForm.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/updatePrices.js"></script>
+  <script src="app.js"></script>
+  <script src="updatePrices.js"></script>
   <script src="js/tableView.js"></script>
 </body>
 </html>
