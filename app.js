@@ -14,6 +14,7 @@ window.onload = exibirAlarmes()
 
 
 function exibirAlarmes() {
+    /*
     const alarmes = JSON.parse(localStorage.getItem('alarmes')) || []
 
     const listaAlarmes = document.getElementById('listaAlarmes')
@@ -36,6 +37,7 @@ function exibirAlarmes() {
         listaAlarmes.appendChild(alarmeItem)
     });
     verificarAlarmes()
+    */
 }
 
 function cadastrarAlarme() {
