@@ -69,4 +69,3 @@ function populateCurrencySelect() {
   
   // Chama a função para popular o select assim que o script for carregado
   populateCurrencySelect();
-  
