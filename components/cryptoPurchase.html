@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Compra de Crypto</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/cryptoPurchaseForm.css">
+</head>
+<body>
+  <header>
+    <h1>Cadastro de Compra de Crypto</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="../alarmView.html">Visualizar Alarmes</a></li>
+        <li><a href="../cryptoRegister.html">Cadastrar Criptomoeda</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="cryptoPurchase">
+      <h2>Cadastro de Compra de Crypto</h2>
+      <form id="purchaseForm">
+        <label for="currencySelect">Tipo da Moeda:</label>
+        <select id="currencySelect" name="currencySelect" required>
+          <!-- Opções serão preenchidas dinamicamente -->
+        </select>
+        <br><br>
+        <label for="quantityInput">Quantidade:</label>
+        <input type="number" id="quantityInput" name="quantityInput" required>
+        <br><br>
+        <label for="purchaseDateInput">Data da Compra:</label>
+        <input type="date" id="purchaseDateInput" name="purchaseDateInput" required>
+        <br><br>
+        <label for="totalValueInput">Valor da Compra (BRL):</label>
+        <input type="number" id="totalValueInput" name="totalValueInput" required>
+        <br><br>
+        <label for="notesInput">Observações:</label>
+        <textarea id="notesInput" name="notesInput"></textarea>
+        <br><br>
+        <button type="button" onclick="cadastrarCompra()">Cadastrar Compra</button>
+      </form>
+      <div id="purchaseResult"></div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Coin Dashboard</p>
+  </footer>
+  <script src="../js/cryptoPurchaseForm.js"></script>
+</body>
+</html>

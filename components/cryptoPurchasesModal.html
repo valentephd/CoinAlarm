@@ -1,0 +1,24 @@
+<div id="modalCompras" class="modal">
+  <div class="modal-content">
+    <span class="close-button" onclick="fecharModalCompras()">&times;</span>
+    <h2>Compras de <span id="modalMoedaNome"></span> (<span id="modalMoedaQuantidade"></span> - R$ <span id="modalMoedaValorAtual"></span>)</h2>
+    <table id="comprasTable">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Quantidade</th>
+          <th>Valor (BRL)</th>
+          <th>Valor Atual (BRL)</th>
+          <th>Ganho/Perda</th>
+          <th>Observações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Linhas preenchidas dinamicamente via JS -->
+      </tbody>
+    </table>
+    <div class="modal-footer">
+      <button class="exit-button" onclick="fecharModalCompras()">Sair</button>
+    </div>
+  </div>
+</div>

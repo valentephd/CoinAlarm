@@ -1,0 +1,72 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+}
+
+.modal-content {
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.close-button:hover {
+    color: red;
+}
+
+.modal-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.exit-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.exit-button:hover {
+    background-color: #45a049;
+}
+
+#comprasTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#comprasTable th, #comprasTable td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+#comprasTable th {
+    background-color: #f2f2f2;
+}
+
+.gain-loss-arrow-down {
+    color: #ff0101;
+    mix-blend-mode: difference;
+}

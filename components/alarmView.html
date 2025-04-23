@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizar Alarmes</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/cryptoAlarmForm.css">
+</head>
+<body>
+  <header>
+    <h1>Visualizar Alarmes</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="../cryptoPurchase.html">Cadastro de Compra</a></li>
+        <li><a href="../cryptoRegister.html">Cadastrar Criptomoeda</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="cryptoAlarmSection">
+      <h2>Cadastro de Alarme</h2>
+      <form id="alarmForm">
+        <label for="alarmCurrencySelect">Tipo da Moeda:</label>
+        <select id="alarmCurrencySelect" name="alarmCurrencySelect" required>
+          <!-- Opções serão preenchidas dinamicamente -->
+        </select>
+        <br><br>
+        <label for="targetValueInput">Valor Alvo (BRL):</label>
+        <input type="number" id="targetValueInput" name="targetValueInput" required>
+        <br><br>
+        <button type="button" onclick="cadastrarAlarme()">Cadastrar Alarme</button>
+      </form>
+      <div id="alarmResult"></div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Coin Dashboard</p>
+  </footer>
+  <script src="../js/cryptoAlarmForm.js"></script>
+</body>
+</html>
