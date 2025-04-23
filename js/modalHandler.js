@@ -9,7 +9,6 @@ function abrirModalCompras(moeda) {
       modalContainer.innerHTML = modalHTML;
       document.getElementById('modalMoedaNome').textContent = moeda;
       document.getElementById('modalCompras').style.display = 'block';
-      document.body.classList.add('modal-open'); // Add class to body
       carregarComprasModal(moeda);
     });
 }
@@ -18,7 +17,6 @@ function fecharModalCompras() {
   const modalContainer = document.getElementById('modalContainer');
   if (modalContainer) {
     modalContainer.remove();
-    document.body.classList.remove('modal-open'); // Remove class from body
   }
 }
 
