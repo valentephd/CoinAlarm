@@ -56,7 +56,8 @@ function atualizarTabelaCryptos() {
             let gainLossText = !precoAtual ? "N/A" : (gainLoss > 0 ? `+R$ ${gainLoss.toFixed(2)} (+${gainLossPercent.toFixed(2)}%)` : gainLoss < 0 ? `-R$ ${Math.abs(gainLoss).toFixed(2)} (${gainLossPercent.toFixed(2)}%)` : `R$ 0.00 (0.00%)`);
 
             let row = tabelaBody.insertRow();
-            row.insertCell(0).textContent = moeda;
+            const moedaCell = row.insertCell(0);
+            moedaCell.innerHTML = `<a href="#" onclick="abrirModalCompras('${moeda}')">${moeda}</a>`;
             row.insertCell(1).textContent = totalQuantity.toFixed(6);
             row.insertCell(2).textContent = `R$ ${totalInvestido.toFixed(2)}`;
             row.insertCell(3).textContent = `R$ ${valorAtual.toFixed(2)}`;
