@@ -1,25 +1,27 @@
 // Função para popular o select de moedas dinamicamente
 function populateCurrencySelect() {
     let currencies = JSON.parse(localStorage.getItem("availableCurrencies"));
-    if (!currencies) {
-      currencies = ["BTC", "ETH", "LTC", "BCH", "DOT", "AAVE"];
-      localStorage.setItem("availableCurrencies", JSON.stringify(currencies));
+    if (!currencies || currencies.length === 0) {
+        currencies = ["BTC", "ETH", "LTC", "BCH", "DOT", "AAVE"];
+        localStorage.setItem("availableCurrencies", JSON.stringify(currencies));
     }
     const select = document.getElementById("currencySelect");
-    select.innerHTML = "";
+    select.innerHTML = ""; // Limpa o dropdown antes de preenchê-lo
+
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "Escolha uma moeda";
     select.appendChild(defaultOption);
+
     currencies.forEach(currency => {
-      const option = document.createElement("option");
-      option.value = currency;
-      option.textContent = currency;
-      select.appendChild(option);
+        const option = document.createElement("option");
+        option.value = currency;
+        option.textContent = currency;
+        select.appendChild(option);
     });
-  }
-  
-  function cadastrarCompra() {
+}
+
+function cadastrarCompra() {
     const currency = document.getElementById('currencySelect').value;
     const quantityValue = document.getElementById('quantityInput').value;
     const purchaseDate = document.getElementById('purchaseDateInput').value;

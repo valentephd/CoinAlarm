@@ -8,69 +8,75 @@
   <link rel="stylesheet" href="css/cryptoPurchaseForm.css">
   <link rel="stylesheet" href="css/cryptoAlarmForm.css">
   <link rel="stylesheet" href="css/cryptoPurchasesModal.css">
+  <link rel="stylesheet" href="css/menu.css">
 </head>
 <body>
-  <header>
-    <h1>Sistema de Controle de Criptomoedas</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Dashboard</a></li>
-        <li><a href="cryptoPurchase.html">Cadastro de Compra</a></li>
-        <li><a href="alarmView.html">Visualizar Alarmes</a></li>
-        <li><a href="cryptoRegister.html">Cadastrar Criptomoeda</a></li>
-        <li><a href="backup.html">Backup</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <div class="top-section">
-      <div class="left-column">
-        <!-- Removido o componente de Cadastro de Compra -->
+  <div id="menuContainer">
+    <div data-include="components/menu.html"></div>
+  </div>
+  <div id="content">
+    <header>
+      <h1>Sistema de Controle de Criptomoedas</h1>
+    </header>
+    <main>
+      <div class="top-section">
+        <div class="left-column">
+          <!-- Removido o componente de Cadastro de Compra -->
+        </div>
+        <div class="right-column">
+          <!-- Removido o componente de Cadastro de Alarme -->
+        </div>
       </div>
-      <div class="right-column">
-        <!-- Removido o componente de Cadastro de Alarme -->
+      <div class="bottom-section">
+        <div class="table-header">
+          <h2>Visão Geral das Criptomoedas</h2>
+          <button id="atualizarTabelaBtn" title="Atualizar Tabela">🔄</button>
+        </div>
+        <table id="cryptoTable">
+          <thead>
+            <tr>
+              <th>Moeda</th>
+              <th>Quantidade Total</th>
+              <th>Valor Total Investido (BRL)</th>
+              <th>Valor Atual (BRL)</th>
+              <th>Preço Médio (BRL)</th>
+              <th>Alerta de Preço (BRL)</th>
+              <th>Preço Atual (BRL)</th>
+              <th>Ganho/Perda</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Linhas preenchidas dinamicamente via JS -->
+          </tbody>
+        </table>
+        <!-- Resumo do Total Investido -->
+        <br />
+        <br />
+        <br />
+        <div id="totalInvestidoResumo"></div>
+        <div id="totalValorAtualResumo"></div>
+        <div id="ganhoPerdaResumo"></div>
       </div>
-    </div>
-    <div class="bottom-section">
-      <div class="table-header">
-        <h2>Visão Geral das Criptomoedas</h2>
-        <button id="atualizarTabelaBtn" title="Atualizar Tabela">🔄</button>
-      </div>
-      <table id="cryptoTable">
-        <thead>
-          <tr>
-            <th>Moeda</th>
-            <th>Quantidade Total</th>
-            <th>Valor Total Investido (BRL)</th>
-            <th>Valor Atual (BRL)</th>
-            <th>Preço Médio (BRL)</th>
-            <th>Alerta de Preço (BRL)</th>
-            <th>Preço Atual (BRL)</th>
-            <th>Ganho/Perda</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Linhas preenchidas dinamicamente via JS -->
-        </tbody>
-      </table>
-      <!-- Resumo do Total Investido -->
-      <br />
-      <br />
-      <br />
-      <div id="totalInvestidoResumo"></div>
-      <div id="totalValorAtualResumo"></div>
-      <div id="ganhoPerdaResumo"></div>
-    </div>
-  </main>
+    </main>
 
-  <footer>
-    <p>&copy; 2025 Coin Dashboard</p>
-  </footer>
+    <footer>
+      <p>&copy; 2025 Sistema de Controle de Criptomoedas</p>
+    </footer>
+  </div>
   <script src="updatePrices.js"></script>
   <script src="js/tableView.js"></script>
   <script src="js/cryptoPurchaseForm.js"></script>
   <script src="js/cryptoAlarmForm.js"></script>
   <script src="js/modalHandler.js"></script>
   <script src="app.js"></script>
+  <script src="router.js"></script>
+  <script src="js/menu.js"></script>
+  <script>
+    document.querySelectorAll('[data-include]').forEach(el => {
+      fetch(el.getAttribute('data-include'))
+        .then(response => response.text())
+        .then(html => el.innerHTML = html);
+    });
+  </script>
 </body>
 </html>
