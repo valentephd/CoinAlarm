@@ -6,6 +6,8 @@ function populateCurrencySelect() {
         localStorage.setItem("availableCurrencies", JSON.stringify(currencies));
     }
     const select = document.getElementById("currencySelect");
+    if (!select) return; // Ensure the select element exists
+
     select.innerHTML = ""; // Limpa o dropdown antes de preenchê-lo
 
     const defaultOption = document.createElement("option");

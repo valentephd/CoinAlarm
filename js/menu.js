@@ -1,5 +1,7 @@
 function toggleMenu() {
   const sideMenu = document.getElementById("sideMenu");
+  if (!sideMenu) return; // Ensure sideMenu exists
+
   const isExpanded = sideMenu.classList.contains("menu-expanded");
 
   if (isExpanded) {
@@ -16,8 +18,10 @@ function toggleMenu() {
 }
 
 function initializeMenu() {
-  const savedStyle = localStorage.getItem("menuStyle") || "compact";
   const sideMenu = document.getElementById("sideMenu");
+  if (!sideMenu) return; // Ensure sideMenu exists
+
+  const savedStyle = localStorage.getItem("menuStyle") || "compact";
 
   if (savedStyle === "expanded") {
     sideMenu.classList.add("menu-expanded");
@@ -33,6 +37,7 @@ function initializeMenu() {
 function adjustContentMargin() {
   const sideMenu = document.getElementById("sideMenu");
   const content = document.getElementById("content");
+  if (!sideMenu || !content) return; // Ensure both elements exist
 
   if (sideMenu.classList.contains("menu-expanded")) {
     content.style.marginLeft = window.innerWidth <= 768 ? "25%" : "18%";

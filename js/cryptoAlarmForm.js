@@ -5,11 +5,14 @@ function populateAlarmCurrencySelect() {
     localStorage.setItem("availableCurrencies", JSON.stringify(currencies));
   }
   const select = document.getElementById("alarmCurrencySelect");
-  select.innerHTML = "";
+  if (!select) return; // Ensure the select element exists
+
+  select.innerHTML = ""; // Clear the dropdown before populating
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
   defaultOption.textContent = "Escolha uma moeda";
   select.appendChild(defaultOption);
+
   currencies.forEach(currency => {
     const option = document.createElement("option");
     option.value = currency;

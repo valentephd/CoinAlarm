@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '/cryptoPurchase': './components/cryptoPurchase.html',
         '/alarmView': './components/alarmView.html',
         '/cryptoRegister': './components/cryptoRegister.html',
-        '/backup': './backup.html',
+        '/backup': './components/backup.html',
         '/cryptoSale': './components/cryptoSaleForm.html',
     };
 
