@@ -10,12 +10,16 @@
 <body>
     <div id="content">
     <header>
-        <h1>Backup do LocalStorage AAAAAA</h1>
+        <button onclick="window.history.back()" class="action-button back-button">Voltar</button>
+        <h1>Backup do LocalStorage</h1>
     </header>
     <main>
-        <div id="backupSections">
-        <!-- Dados do LocalStorage serão exibidos aqui -->
-        </div>
+        <section id="backup">
+            <button id="saveAllButton" class="action-button large-button">Salvar Todos</button>
+            <div id="backupSections">
+                <!-- Dados do LocalStorage serão exibidos aqui -->
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2025 Sistema de Controle de Criptomoedas</p>
