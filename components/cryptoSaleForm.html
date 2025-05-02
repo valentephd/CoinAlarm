@@ -50,12 +50,6 @@
     </footer>
   </div>
   <script src="../js/menu.js"></script>
-  <script>
-    document.querySelectorAll('[data-include]').forEach(el => {
-      fetch(el.getAttribute('data-include'))
-        .then(response => response.text())
-        .then(html => el.innerHTML = html);
-    });
-  </script>
+  <script src="../js/cryptoSaleForm.js"></script>
 </body>
 </html>
