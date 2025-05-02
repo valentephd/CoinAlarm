@@ -92,6 +92,10 @@ header h1 {
     transform: rotate(90deg);
 }
 
+.accordion span {
+    user-select: text; /* Allow text selection */
+}
+
 .panel {
     display: none;
     overflow: hidden;
