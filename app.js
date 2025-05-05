@@ -8,37 +8,72 @@ const precosCriptos = [
     { codigoMoeda: "BCH", valorAtual: 0 },
     { codigoMoeda: "DOT", valorAtual: 0 },
     { codigoMoeda: "AAVE", valorAtual: 0 }
-]
+];
 
-window.onload = exibirAlarmes()
+// Carregar componentes fixos (header, menu, footer)
+function carregarComponentesFixos() {
+    fetch('components/header/header.html')
+        .then(response => response.text())
+        .then(html => document.getElementById('header').innerHTML = html);
 
+    fetch('components/menu/menu.html')
+        .then(response => response.text())
+        .then(html => document.getElementById('menu').innerHTML = html);
 
-function exibirAlarmes() {
-    /*
-    const alarmes = JSON.parse(localStorage.getItem('alarmes')) || []
-
-    const listaAlarmes = document.getElementById('listaAlarmes')
-    listaAlarmes.innerHTML = ''
-
-    // Adiciona cada alarme na lista
-    alarmes.forEach(alarme => {
-        const alarmeItem = document.createElement('li')
-        alarmeItem.id = `alarme-${alarme.id}`
-        alarmeItem.textContent = `Moeda: ${alarme.codigoMoeda}, Valor Alvo: R$ ${alarme.valorAlvo}`
-        // Cria o botão de remover
-        const removerBtn = document.createElement('button')
-        removerBtn.textContent = 'Remover'
-        removerBtn.style.marginLeft = '10px' // Espaço entre o texto e o botão
-        removerBtn.onclick = () => removerAlarme(alarme.id)
-
-        // Adiciona o botão ao item da lista
-        alarmeItem.appendChild(removerBtn)
-
-        listaAlarmes.appendChild(alarmeItem)
-    });
-    verificarAlarmes()
-    */
+    fetch('components/footer/footer.html')
+        .then(response => response.text())
+        .then(html => document.getElementById('footer').innerHTML = html);
 }
+
+// Gerenciar a navegação e carregar o conteúdo dinâmico
+function carregarConteudo(route) {
+    fetch(`components/${route}/${route}.html`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro ao carregar o componente: ${route}`);
+            }
+            return response.text();
+        })
+        .then(html => document.getElementById('content').innerHTML = html)
+        .catch(error => {
+            console.error(error);
+            document.getElementById('content').innerHTML = '<p>Erro ao carregar o conteúdo.</p>';
+        });
+}
+
+// Configurar o roteamento SPA
+window.addEventListener('hashchange', () => {
+    const route = location.hash.slice(1) || 'index';
+    carregarConteudo(route);
+});
+
+// Inicializar a aplicação
+window.onload = () => {
+    carregarComponentesFixos();
+    carregarConteudo(location.hash.slice(1) || 'index');
+};
+
+// Código comentado que não será mais executado diretamente
+/*
+function exibirAlarmes() {
+    const alarmes = JSON.parse(localStorage.getItem('alarmes')) || [];
+    const listaAlarmes = document.getElementById('listaAlarmes');
+    listaAlarmes.innerHTML = '';
+
+    alarmes.forEach(alarme => {
+        const alarmeItem = document.createElement('li');
+        alarmeItem.id = `alarme-${alarme.id}`;
+        alarmeItem.textContent = `Moeda: ${alarme.codigoMoeda}, Valor Alvo: R$ ${alarme.valorAlvo}`;
+        const removerBtn = document.createElement('button');
+        removerBtn.textContent = 'Remover';
+        removerBtn.style.marginLeft = '10px';
+        removerBtn.onclick = () => removerAlarme(alarme.id);
+        alarmeItem.appendChild(removerBtn);
+        listaAlarmes.appendChild(alarmeItem);
+    });
+    verificarAlarmes();
+}
+*/
 
 function cadastrarAlarme() {
     const codeCripto = document.getElementById('codeCripto').value
