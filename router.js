@@ -1,5 +1,6 @@
+import { renderDashboard } from './components/dashboard/dashboard.js';
+
 const routes = {
-  index: 'components/index/index.html', // Certifique-se de que o arquivo existe
   dashboard: 'components/dashboard/dashboard.html',
   cryptoPurchase: 'components/cryptoPurchase/cryptoPurchase.html',
   cryptoSale: 'components/cryptoSale/cryptoSale.html',
@@ -8,7 +9,7 @@ const routes = {
 };
 
 function loadComponent(hash) {
-  const path = routes[hash] || routes.index;
+  const path = routes[hash] || routes.dashboard; // Usar dashboard como padrão
   fetch(path)
     .then(response => {
       if (!response.ok) {
@@ -17,7 +18,12 @@ function loadComponent(hash) {
       return response.text();
     })
     .then(html => {
-      document.getElementById('content').innerHTML = html;
+      const content = document.getElementById('content');
+      content.style.display = 'block'; // Garantir que o conteúdo seja exibido
+      content.innerHTML = html;
+      if (hash === 'dashboard') {
+        renderDashboard(); // Renderizar o dashboard
+      }
     })
     .catch(error => {
       console.error(error);
@@ -30,5 +36,5 @@ window.addEventListener('hashchange', () => {
   loadComponent(hash);
 });
 
-// Load the default route on page load
-loadComponent(location.hash.slice(1) || 'index');
+// Carregar a rota padrão na inicialização
+loadComponent(location.hash.slice(1) || 'dashboard');

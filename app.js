@@ -1,7 +1,8 @@
+import { renderDashboard } from './components/dashboard/dashboard.js'; // Importar renderDashboard
+
 const somAlarme = new Audio('assets/alarme.mp3');
 
-// Exemplo do array global de preços de criptomoedas
-const precosCriptos = [
+export const precosCriptos = [
     { codigoMoeda: "BTC", valorAtual: 0 },
     { codigoMoeda: "ETH", valorAtual: 0 },
     { codigoMoeda: "LTC", valorAtual: 0 },
@@ -40,23 +41,24 @@ function carregarConteudo(route) {
             }
             return response.text();
         })
-        .then(html => document.getElementById('content').innerHTML = html)
+        .then(html => {
+            const content = document.getElementById('content');
+            content.style.display = 'block'; // Garantir que o conteúdo seja exibido
+            content.innerHTML = html;
+            if (route === 'dashboard') {
+                renderDashboard(); // Renderizar o dashboard apenas quando necessário
+            }
+        })
         .catch(error => {
             console.error(error);
             document.getElementById('content').innerHTML = '<p>Erro ao carregar o conteúdo.</p>';
         });
 }
 
-// Configurar o roteamento SPA
-window.addEventListener('hashchange', () => {
-    const route = location.hash.slice(1) || 'index';
-    carregarConteudo(route);
-});
-
 // Inicializar a aplicação
 window.onload = () => {
     carregarComponentesFixos();
-    carregarConteudo(location.hash.slice(1) || 'index');
+    carregarConteudo('dashboard'); // Chamar carregarConteudo para carregar o dashboard
 };
 
 // Código comentado que não será mais executado diretamente

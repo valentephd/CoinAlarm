@@ -1,6 +1,6 @@
 function toggleMenu() {
   const sideMenu = document.getElementById("sideMenu");
-  if (!sideMenu) return;
+  if (!sideMenu) return; // Ensure sideMenu exists
 
   const isExpanded = sideMenu.classList.contains("menu-expanded");
 
@@ -19,8 +19,7 @@ function toggleMenu() {
 
 function initializeMenu() {
   const sideMenu = document.getElementById("sideMenu");
-  const menuToggle = document.getElementById("menuToggle");
-  if (!sideMenu || !menuToggle) return;
+  if (!sideMenu) return; // Ensure sideMenu exists
 
   const savedStyle = localStorage.getItem("menuStyle") || "compact";
 
@@ -32,20 +31,23 @@ function initializeMenu() {
     sideMenu.classList.remove("menu-expanded");
   }
 
-  menuToggle.addEventListener("click", toggleMenu);
   adjustContentMargin();
 }
 
 function adjustContentMargin() {
   const sideMenu = document.getElementById("sideMenu");
-  const content = document.getElementById("content");
-  if (!sideMenu || !content) return;
+  const mainContent = document.querySelectorAll("#header, #content, #footer"); // Selecionar header, content e footer
+  if (!sideMenu || !mainContent) return;
 
-  if (sideMenu.classList.contains("menu-expanded")) {
-    content.style.marginLeft = window.innerWidth <= 768 ? "25%" : "18%";
-  } else {
-    content.style.marginLeft = "60px";
-  }
+  const isExpanded = sideMenu.classList.contains("menu-expanded");
+
+  mainContent.forEach(element => {
+    if (isExpanded) {
+      element.style.marginLeft = window.innerWidth <= 768 ? "25%" : "18%";
+    } else {
+      element.style.marginLeft = "60px"; // Espaço para o menu contraído
+    }
+  });
 }
 
 window.addEventListener("resize", adjustContentMargin);

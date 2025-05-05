@@ -67,13 +67,14 @@
 }
 
 #content {
-  margin-left: 60px; /* Default for compact menu */
+  margin-left: auto; /* Centralizar horizontalmente */
+  margin-right: auto; /* Centralizar horizontalmente */
   transition: margin-left 0.3s;
-  padding: 20px; /* Add padding for better responsiveness */
+  padding: 20px; /* Adicionar padding para melhor responsividade */
 }
 
 #sideMenu.menu-expanded ~ #content {
-  margin-left: 18%; /* Adjust margin for expanded menu */
+  margin-left: auto; /* Garantir centralização mesmo com o menu expandido */
 }
 
 @media screen and (max-width: 768px) {
@@ -82,6 +83,6 @@
   }
 
   #sideMenu.menu-expanded ~ #content {
-    margin-left: 25%; /* Adjust margin for smaller screens */
+    margin-left: 25%; /* Ajustar margem para telas menores */
   }
 }

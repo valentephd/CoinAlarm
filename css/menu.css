@@ -67,13 +67,18 @@
 }
 
 #content {
-  margin-left: 60px; /* Default for compact menu */
+  margin: 0 auto; /* Center horizontally */
+  max-width: 1200px; /* Optional: Limit the maximum width */
   transition: margin-left 0.3s;
   padding: 20px; /* Add padding for better responsiveness */
 }
 
 #sideMenu.menu-expanded ~ #content {
-  margin-left: 18%; /* Adjust margin for expanded menu */
+  margin-left: 18%; /* Adjust for expanded menu */
+}
+
+#sideMenu.menu-compact ~ #content {
+  margin-left: 60px; /* Adjust for compact menu */
 }
 
 @media screen and (max-width: 768px) {

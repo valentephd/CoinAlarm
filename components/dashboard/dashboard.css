@@ -1,0 +1,44 @@
+#content {
+    width: 60%; /* Definir largura de 60% para o conteúdo */
+    margin: 0 auto; /* Centralizar horizontalmente */
+    display: grid;
+    justify-self: center; /* Centralizar o conteúdo */
+}
+
+.dashboard {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard h1 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center; /* Centralizar o título */
+}
+
+.dashboard table {
+    width: 100%; /* A tabela ocupará todo o espaço do #content */
+    border-collapse: collapse;
+}
+
+.dashboard table th, .dashboard table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.dashboard table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 970px) {
+    #content {
+        width: 970px; /* Não diminuir mais o tamanho do conteúdo */
+    }
+
+    .dashboard table {
+        overflow-x: auto; /* Adicionar barra de rolagem horizontal */
+        display: block; /* Permitir rolagem */
+    }
+}
