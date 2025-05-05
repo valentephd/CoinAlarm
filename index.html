@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Controle de Criptomoedas</title>
+    <link rel="stylesheet" href="components/layout/layout.css">
     <link rel="stylesheet" href="components/header/header.css">
     <link rel="stylesheet" href="components/menu/menu.css">
     <link rel="stylesheet" href="components/footer/footer.css">
     <link rel="stylesheet" href="components/dashboard/dashboard.css">
 </head>
 <body>
-    <div id="header"></div>
-    <div id="menu"></div>
-    <div id="content">
-        <!-- O conteúdo será carregado dinamicamente aqui -->
+    <div id="menuContainer">
+        <div id="menu"></div>
     </div>
-    <div id="footer"></div>
+    <div id="mainContent">
+        <div id="header"></div>
+        <div id="content">
+            <!-- O conteúdo será carregado dinamicamente aqui -->
+        </div>
+        <div id="footer"></div>
+    </div>
     <script src="router.js" type="module"></script>
     <script src="app.js" type="module"></script>
     <script src="components/dashboard/dashboard.js" type="module"></script>

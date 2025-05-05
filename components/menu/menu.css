@@ -66,23 +66,8 @@
   display: none;
 }
 
-#content {
-  margin-left: auto; /* Centralizar horizontalmente */
-  margin-right: auto; /* Centralizar horizontalmente */
-  transition: margin-left 0.3s;
-  padding: 20px; /* Adicionar padding para melhor responsividade */
-}
-
-#sideMenu.menu-expanded ~ #content {
-  margin-left: auto; /* Garantir centralização mesmo com o menu expandido */
-}
-
 @media screen and (max-width: 768px) {
   #sideMenu.menu-expanded {
     width: 25%; /* Adjust width for smaller screens */
-  }
-
-  #sideMenu.menu-expanded ~ #content {
-    margin-left: 25%; /* Ajustar margem para telas menores */
   }
 }
