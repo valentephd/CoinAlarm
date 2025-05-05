@@ -13,8 +13,7 @@ function toggleMenu() {
     sideMenu.classList.add("menu-expanded");
     localStorage.setItem("menuStyle", "expanded");
   }
-
-  adjustContentMargin();
+  
 }
 
 function initializeMenu() {
@@ -30,25 +29,7 @@ function initializeMenu() {
     sideMenu.classList.add("menu-compact");
     sideMenu.classList.remove("menu-expanded");
   }
-
-  adjustContentMargin();
+  
 }
 
-function adjustContentMargin() {
-  const sideMenu = document.getElementById("sideMenu");
-  const mainContent = document.querySelectorAll("#header, #content, #footer"); // Selecionar header, content e footer
-  if (!sideMenu || !mainContent) return;
-
-  const isExpanded = sideMenu.classList.contains("menu-expanded");
-
-  mainContent.forEach(element => {
-    if (isExpanded) {
-      element.style.marginLeft = window.innerWidth <= 768 ? "25%" : "18%";
-    } else {
-      element.style.marginLeft = "60px"; // Espaço para o menu contraído
-    }
-  });
-}
-
-window.addEventListener("resize", adjustContentMargin);
 document.addEventListener("DOMContentLoaded", initializeMenu);
