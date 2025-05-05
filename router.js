@@ -1,5 +1,5 @@
 const routes = {
-  index: 'components/index/index.html',
+  index: 'components/index/index.html', // Certifique-se de que o arquivo existe
   dashboard: 'components/dashboard/dashboard.html',
   cryptoPurchase: 'components/cryptoPurchase/cryptoPurchase.html',
   cryptoSale: 'components/cryptoSale/cryptoSale.html',

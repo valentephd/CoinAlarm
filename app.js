@@ -18,7 +18,12 @@ function carregarComponentesFixos() {
 
     fetch('components/menu/menu.html')
         .then(response => response.text())
-        .then(html => document.getElementById('menu').innerHTML = html);
+        .then(html => {
+            document.getElementById('menu').innerHTML = html;
+            const script = document.createElement('script');
+            script.src = 'components/menu/menu.js';
+            document.body.appendChild(script);
+        });
 
     fetch('components/footer/footer.html')
         .then(response => response.text())
@@ -27,7 +32,8 @@ function carregarComponentesFixos() {
 
 // Gerenciar a navegação e carregar o conteúdo dinâmico
 function carregarConteudo(route) {
-    fetch(`components/${route}/${route}.html`)
+    const path = `components/${route}/${route}.html`;
+    fetch(path)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro ao carregar o componente: ${route}`);
