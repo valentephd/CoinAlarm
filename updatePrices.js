@@ -1,23 +1,16 @@
-console.log('updatePrices ....')
+import { precosCriptos } from './app.js';
+import { renderDashboard } from './components/dashboard/dashboard.js';
 
-document.addEventListener("DOMContentLoaded", function () {
-    console.log('DOMContentLoaded ....')
-    atualizarPrecos();
-    document.getElementById("atualizarTabelaBtn").addEventListener("click", atualizarPrecos);
-});
+export function updatePrices(){
+    console.log('updatePrices sendo chamado aqui....')
 
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log('DOMContentLoaded ....')
+        atualizarPrecos();
+        document.getElementById("atualizarTabelaBtn").addEventListener("click", atualizarPrecos);
+    });    
+}
 
-// updatePrices.js
-// Usa a API v4 do Mercado Bitcoin para atualizar preços dinamicamente
-// Mantém a estrutura original de chamar atualizarPrecos() periodicamente
-
-// Base da API
-const API_URL = 'https://api.mercadobitcoin.net/api/v4/tickers?symbols[]=';
-
-// Array global que será reconstruído a cada chamada, conforme moedas disponíveis
-//var precosCriptos = [];
-
-// Função principal: carrega moedas e dispara buscas individuais
 function atualizarPrecos() {
     console.log('updatePrices .... in atualizarPrecos')
     // Obtém lista de códigos de moedas do localStorage
@@ -43,6 +36,7 @@ function atualizarPrecos() {
 
 // Busca o preço da moeda na API do Mercado Bitcoin
 async function getPrecoBRL(codigoMoeda) {
+    const API_URL = 'https://api.mercadobitcoin.net/api/v4/tickers?symbols[]=';
     const url = `${API_URL}${codigoMoeda}-BRL`;
 
     try {
@@ -71,6 +65,9 @@ async function getPrecoBRL(codigoMoeda) {
         if (typeof verificarAlarmes === 'function') {
             verificarAlarmes();
         }
+        
+        console.log('Renderizando dashboard... ');
+        renderDashboard();
     } catch (error) {
         console.error(`❌ Erro ao buscar ${codigoMoeda}-BRL:`, error);
     }

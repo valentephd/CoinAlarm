@@ -1,13 +1,15 @@
 import { precosCriptos } from '../../app.js';
+import { updatePrices } from '../../updatePrices.js';
 
 export function renderDashboard() {
     setTimeout(() => {
-        atualizarTabelaCryptos(); // Chamar após garantir que o DOM foi carregado
+        updateTableDashboard();
     }, 0);
 }
 
-function atualizarTabelaCryptos() {
-    console.log("atualizarTabelaCryptos ...");
+function updateTableDashboard() {
+    updatePrices()
+    console.log("updateTableDashboard ...");
     try {
         const tabelaBody = document.querySelector("#cryptoTable tbody");
         if (!tabelaBody) {
