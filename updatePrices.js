@@ -76,5 +76,6 @@ async function getPrecoBRL(codigoMoeda) {
 // Chama atualizarPrecos() assim que a página carregar e dispara o intervalo
 document.addEventListener('DOMContentLoaded', () => {
     atualizarPrecos();
-    setInterval(atualizarPrecos, 60 * 1000);
+    setInterval(atualizarPrecos, 300 * 1000);
+    console.log('Hora ===>>> ', new Date())
 });
