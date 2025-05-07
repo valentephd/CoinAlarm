@@ -32,6 +32,15 @@
     font-weight: bold;
 }
 
+.table-header {
+    display: flex;
+    align-items: center;
+}
+
+.table-header h2 {
+    margin-right: 2rem;
+}
+
 @media screen and (max-width: 970px) {
     #content {
         width: 970px; /* Não diminuir mais o tamanho do conteúdo */
