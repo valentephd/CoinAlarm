@@ -1,8 +1,9 @@
 import { renderDashboard } from './components/dashboard/dashboard.js';
+import { populateCurrencySelect } from './components/cryptoPurchase/cryptoPurchase.js';
 
 const routes = {
   dashboard: 'components/dashboard/dashboard.html',
-  cryptoPurchase: 'components/cryptoPurchase/cryptoPurchase.html',
+  cryptoPurchase: 'components/cryptoPurchase/cryptoPurchase.html', // Atualizado para nova rota
   cryptoSale: 'components/cryptoSale/cryptoSale.html',
   alarmView: 'components/alarmView/alarmView.html',
   backup: 'components/backup/backup.html',
@@ -23,6 +24,8 @@ function loadComponent(hash) {
       content.innerHTML = html;
       if (hash === 'dashboard') {
         renderDashboard(); // Renderizar o dashboard
+      } else if (hash === 'cryptoPurchase') {
+        populateCurrencySelect(); // Inicializar a lógica da nova componente
       }
     })
     .catch(error => {
