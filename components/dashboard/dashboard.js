@@ -76,8 +76,8 @@ function updateTableDashboard() {
             row.insertCell(2).textContent = `R$ ${totalInvestido.toFixed(2)}`;
             row.insertCell(3).textContent = `R$ ${valorAtual.toFixed(2)}`;
             row.insertCell(4).textContent = `R$ ${precoMedio.toFixed(2)}`;
-            row.insertCell(5).textContent = `R$ ${alertaPreco.toFixed(2)}`;
-            row.insertCell(6).textContent = precoAtual ? `R$ ${precoAtual.toFixed(2)}` : "N/A";
+            row.insertCell(5).textContent = precoAtual ? `R$ ${precoAtual.toFixed(2)}` : "N/A";
+            row.insertCell(6).textContent = `R$ ${alertaPreco.toFixed(2)}`;
             row.insertCell(7).textContent = gainLossText;
         });
 
