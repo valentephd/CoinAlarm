@@ -1,16 +1,17 @@
 import { renderDashboard } from "./components/dashboard/dashboard.js";
 import { populateCurrencySelect } from "./components/cryptoPurchase/cryptoPurchase.js";
+import { populateSaleCurrencySelect } from "./components/cryptoSaleForm/cryptoSaleForm.js";
 
 const routes = {
     dashboard: "components/dashboard/dashboard.html",
-    cryptoPurchase: "components/cryptoPurchase/cryptoPurchase.html", // Atualizado para nova rota
-    cryptoSale: "components/cryptoSale/cryptoSale.html",
+    cryptoPurchase: "components/cryptoPurchase/cryptoPurchase.html",
+    cryptoSale: "components/cryptoSaleForm/cryptoSaleForm.html",
     alarmView: "components/alarmView/alarmView.html",
     backup: "components/backup/backup.html",
 };
         
 function loadComponent(hash) {
-    const path = routes[hash] || routes.dashboard; // Usar dashboard como padrão
+    const path = routes[hash] || routes.dashboard;
     fetch(path)
         .then((response) => {
             if (!response.ok) {
@@ -20,12 +21,14 @@ function loadComponent(hash) {
         })
         .then((html) => {
             const content = document.getElementById("content");
-            content.style.display = "block"; // Garantir que o conteúdo seja exibido
+            content.style.display = "block";
             content.innerHTML = html;
             if (hash === "dashboard") {
-                renderDashboard(); // Renderizar o dashboard
+                renderDashboard();
             } else if (hash === "cryptoPurchase") {
-                populateCurrencySelect(); // Inicializar a lógica da nova componente
+                populateCurrencySelect();
+            } else if (hash === "cryptoSale") {
+                populateSaleCurrencySelect();
             }
         })
         .catch((error) => {

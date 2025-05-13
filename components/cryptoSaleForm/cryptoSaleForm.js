@@ -1,4 +1,3 @@
-/*
 export function populateSaleCurrencySelect() {
     let currencies = JSON.parse(localStorage.getItem("availableCurrencies"));
     if (!currencies || currencies.length === 0) {
@@ -23,7 +22,7 @@ export function populateSaleCurrencySelect() {
     });
 }
 
-function cadastrarVenda() {
+export function cadastrarVenda() {
     const currency = document.getElementById("currencySelect").value;
     const quantityValue = document.getElementById("quantityInput").value;
     const saleDate = document.getElementById("saleDateInput").value;
@@ -73,4 +72,3 @@ function gerarIdVenda() {
 
 // Populate the currency select dropdown when the script is loaded
 document.addEventListener("DOMContentLoaded", populateSaleCurrencySelect);
-*/

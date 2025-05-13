@@ -1,0 +1,28 @@
+<section id="cryptoSale">
+    <link rel="stylesheet" href="./components/cryptoSaleForm/cryptoSaleForm.css">
+    <h2>Cadastro de Venda de Crypto</h2>
+    <form id="saleForm">
+        <label for="currencySelect">Tipo da Moeda:</label>
+        <select id="currencySelect" name="currencySelect" required>
+            <!-- Opções serão preenchidas dinamicamente -->
+        </select>
+        <br><br>
+        <label for="quantityInput">Quantidade Vendida:</label>
+        <input type="number" id="quantityInput" name="quantityInput" required>
+        <br><br>
+        <label for="saleDateInput">Data da Venda:</label>
+        <input type="date" id="saleDateInput" name="saleDateInput" required>
+        <br><br>
+        <label for="totalValueInput">Valor da Venda (BRL):</label>
+        <input type="number" id="totalValueInput" name="totalValueInput" required>
+        <br><br>
+        <label for="notesInput">Observações:</label>
+        <textarea id="notesInput" name="notesInput"></textarea>
+        <br><br>
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <button type="button" onclick="window.history.back()" class="action-button large-button">Voltar</button>
+            <button type="button" onclick="cadastrarVenda()" class="action-button large-button">Cadastrar Venda</button>
+        </div>
+    </form>
+    <div id="saleResult"></div>
+</section>
