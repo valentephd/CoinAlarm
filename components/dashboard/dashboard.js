@@ -45,8 +45,28 @@ export function renderDashboard() {
         });
 
         // Atualizar resumo total investido e valor atual
+        //totalInvestidoResumo.textContent = `Total Investido: R$ ${totalGeralInvestido.toFixed(2)}`;
+        //totalValorAtualResumo.textContent = `Valor Total Atual: R$ ${totalValorAtual.toFixed(2)}`;
+
+
+
+        // Atualizar resumo total investido
         totalInvestidoResumo.textContent = `Total Investido: R$ ${totalGeralInvestido.toFixed(2)}`;
+        let diferencaTotal = totalValorAtual - totalGeralInvestido;
         totalValorAtualResumo.textContent = `Valor Total Atual: R$ ${totalValorAtual.toFixed(2)}`;
+        let porcentagemDiferenca = totalGeralInvestido ? (diferencaTotal / totalGeralInvestido) * 100 : 0;
+
+
+        ganhoPerdaResumo.textContent = (diferencaTotal > 0) ? 
+            'Ganho: R$ $' + diferencaTotal.toFixed(2)
+            :
+            (diferencaTotal < 0) ?
+                'Perda: R$ $' + diferencaTotal.toFixed(2)
+                :
+                'R$ $' + diferencaTotal.toFixed(2)
+        ganhoPerdaResumo.textContent += ` (${porcentagemDiferenca.toFixed(2)}%)`;
+        ganhoPerdaResumo.style.color = (diferencaTotal > 0) ? "blue" : (diferencaTotal < 0) ? "red" : "black";
+
     } catch (error) {
         console.log("Erro ao renderizar o dashboard:", error);
     }
