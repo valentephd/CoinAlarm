@@ -2,7 +2,8 @@ import { precosCriptos, tableOverviewCoins } from './app.js';
 import { renderDashboard } from './components/dashboard/dashboard.js';
 
 export async function updatePrices() {
-    console.log('updatePrices .... in updatePrices')
+    console.log('Hora ===>>> ', new Date())
+    console.log('updatePrices .....')
     // Obtém lista de códigos de moedas do localStorage
     const currencies = JSON.parse(localStorage.getItem('availableCurrencies')) || [];
     if (!Array.isArray(currencies) || currencies.length === 0) {
@@ -14,7 +15,7 @@ export async function updatePrices() {
     await precosCriptos.map(cripto => getPrecoBRL(cripto.codigoMoeda))
     //console.log('precosCriptos in updatePrices ===> ', precosCriptos)
     const novosValores = Array.from(precosCriptos)
-    console.log('novosValores in updatePrices ===> ',  novosValores)
+    //console.log('novosValores in updatePrices ===> ',  novosValores)
     tableOverviewCoins(novosValores);
 }
 
@@ -55,9 +56,6 @@ async function getPrecoBRL(codigoMoeda) {
     }
 }
 
-// Chama updatePrices() assim que a página carregar e dispara o intervalo
 document.addEventListener('DOMContentLoaded', () => {
-    //updatePrices();
-    setInterval(updatePrices, 300 * 1000);
-    console.log('Hora ===>>> ', new Date())
+    setInterval(updatePrices, 30 * 1000);
 });

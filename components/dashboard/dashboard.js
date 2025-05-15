@@ -1,163 +1,53 @@
 import { precosCriptos, dashboardData } from '../../app.js';
 
-/*
 export function renderDashboard() {
-    setTimeout(() => {
-        updateTableDashboard();
-    }, 0);
-}
-*/
-
-export function renderDashboard() {
-    setTimeout(() => {
-        console.log("renderDashboard ...");
-        /*
-        try {
-            const tabelaBody = document.querySelector("#cryptoTable tbody");
-            if (!tabelaBody) {
-                console.error("Tabela não encontrada no DOM.");
-                return;
-            }
-            const totalInvestidoResumo = document.getElementById("totalInvestidoResumo");
-            const totalValorAtualResumo = document.getElementById("totalValorAtualResumo");
-            tabelaBody.innerHTML = ""; // Limpa a tabela antes de preencher
-
-            const compras = JSON.parse(localStorage.getItem("cryptoPurchases")) || [];
-            const alarmes = JSON.parse(localStorage.getItem("alarmes")) || [];
-            
-            if (compras.length === 0) {
-                let row = tabelaBody.insertRow();
-                let cell = row.insertCell(0);
-                cell.colSpan = 6;
-                cell.textContent = "Nenhuma compra registrada.";
-                cell.style.textAlign = "center";
-                totalInvestidoResumo.textContent = "Total Investido: R$ 0,00";
-                totalValorAtualResumo.textContent = "Valor Atual: R$ 0,00";
-                return;
-            }
-
-            // Agrupar compras por moeda
-            const resumoCryptos = {};
-            let totalGeralInvestido = 0;
-            let totalValorAtual = 0;
-
-            compras.forEach(compra => {
-                const { moeda, quantidade, valorTotal } = compra;
-                if (!resumoCryptos[moeda]) {
-                    resumoCryptos[moeda] = { totalQuantity: 0, totalInvestido: 0 };
-                }
-                resumoCryptos[moeda].totalQuantity += parseFloat(quantidade);
-                resumoCryptos[moeda].totalInvestido += parseFloat(valorTotal);
-                totalGeralInvestido += parseFloat(valorTotal);
-            });
-
-            Object.keys(resumoCryptos).forEach(moeda => {
-                const { totalQuantity, totalInvestido } = resumoCryptos[moeda];
-                const precoMedio = totalInvestido / totalQuantity;
-                
-                
-                // Buscar alarme para essa moeda
-                const alarmeEncontrado = alarmes.find(alarme => alarme.codigoMoeda === moeda);
-                const alertaPreco = alarmeEncontrado ? parseFloat(alarmeEncontrado.valorAlvo) : (totalInvestido * 1.1);
-                
-                // Buscar preço atual da moeda no array global precosCriptos
-                let precoAtualObj = precosCriptos.find(cripto => cripto.codigoMoeda === moeda);
-                let precoAtual = precoAtualObj ? parseFloat(precoAtualObj.valorAtual) : 0;
-                
-                const valorAtual = precoAtual * totalQuantity;
-                totalValorAtual += valorAtual;
-                
-                const gainLoss = valorAtual - (precoMedio * totalQuantity);
-                const gainLossPercent = (precoMedio * totalQuantity) ? (gainLoss / (precoMedio * totalQuantity)) * 100 : 0;
-                let gainLossText = !precoAtual ? "N/A" : (gainLoss > 0 ? `+R$ ${gainLoss.toFixed(2)} (+${gainLossPercent.toFixed(2)}%)` : gainLoss < 0 ? `-R$ ${Math.abs(gainLoss).toFixed(2)} (${gainLossPercent.toFixed(2)}%)` : `R$ 0.00 (0.00%)`);
-
-                let row = tabelaBody.insertRow();
-                const moedaCell = row.insertCell(0);
-                moedaCell.innerHTML = `<a href="#" onclick="abrirModalCompras('${moeda}')">${moeda}</a>`;
-                row.insertCell(1).textContent = totalQuantity.toFixed(6);
-                row.insertCell(2).textContent = `R$ ${totalInvestido.toFixed(2)}`;
-                row.insertCell(3).textContent = `R$ ${valorAtual.toFixed(2)}`;
-                row.insertCell(4).textContent = `R$ ${precoMedio.toFixed(2)}`;
-                row.insertCell(5).textContent = precoAtual ? `R$ ${precoAtual.toFixed(2)}` : "N/A";
-                row.insertCell(6).textContent = `R$ ${alertaPreco.toFixed(2)}`;
-                row.insertCell(7).textContent = gainLossText;
-            });
-
-            // Atualizar resumo total investido
-            totalInvestidoResumo.textContent = `Total Investido: R$ ${totalGeralInvestido.toFixed(2)}`;
-            let diferencaTotal = totalValorAtual - totalGeralInvestido;
-            totalValorAtualResumo.textContent = `Valor Total Atual: R$ ${totalValorAtual.toFixed(2)}`;
-            let porcentagemDiferenca = totalGeralInvestido ? (diferencaTotal / totalGeralInvestido) * 100 : 0;
-
-            if(diferencaTotal > 0) {
-                ganhoPerdaResumo.textContent = `Ganho: R$ ${diferencaTotal.toFixed(2)}`;
-                ganhoPerdaResumo.textContent += ` (${porcentagemDiferenca.toFixed(2)}%)`;
-                ganhoPerdaResumo.style.color = "green";
-            } else if(diferencaTotal < 0) {
-                ganhoPerdaResumo.textContent = `Perda: R$ ${diferencaTotal.toFixed(2)}`;
-                ganhoPerdaResumo.textContent += ` (${porcentagemDiferenca.toFixed(2)}%)`;
-                ganhoPerdaResumo.style.color = "red";
-            } else {
-                ganhoPerdaResumo.textContent = `R$ ${diferencaTotal.toFixed(2)}`;
-                ganhoPerdaResumo.textContent += ` (${porcentagemDiferenca.toFixed(2)}%)`;
-                ganhoPerdaResumo.style.color = "black";
-            }
-            
-        } catch (error) {
-            console.log("Erro:", error);
+    try {
+        const tabelaBody = document.querySelector("#cryptoTable tbody");
+        if (!tabelaBody) {
+            console.error("Tabela não encontrada no DOM.");
+            return;
         }
-        */
-        
-        // Nova implementação usando dashboardData
-        console.log('dashboardData in component dashboard: ', dashboardData) // Aqui o array está chegando vazio !!
-        try {
-            const tabelaBody = document.querySelector("#cryptoTable tbody");
-            if (!tabelaBody) {
-                console.error("Tabela não encontrada no DOM.");
-                return;
-            }
 
-            const totalInvestidoResumo = document.getElementById("totalInvestidoResumo");
-            const totalValorAtualResumo = document.getElementById("totalValorAtualResumo");
-            tabelaBody.innerHTML = ""; // Limpa a tabela antes de preencher
+        const totalInvestidoResumo = document.getElementById("totalInvestidoResumo");
+        const totalValorAtualResumo = document.getElementById("totalValorAtualResumo");
+        tabelaBody.innerHTML = "";
 
-            if (dashboardData.length === 0) {
-                let row = tabelaBody.insertRow();
-                let cell = row.insertCell(0);
-                cell.colSpan = 8;
-                cell.textContent = "Nenhuma compra registrada.";
-                cell.style.textAlign = "center";
-                totalInvestidoResumo.textContent = "Total Investido: R$ 0,00";
-                totalValorAtualResumo.textContent = "Valor Atual: R$ 0,00";
-                return;
-            }
-
-            let totalGeralInvestido = 0;
-            let totalValorAtual = 0;
-
-            dashboardData.forEach(data => {
-                const { moeda, quantidade, valorTotalInvestido, valorAtual, precoMedio, precoAtual, alertaPreco, ganhoPerda } = data;
-
-                totalGeralInvestido += valorTotalInvestido;
-                totalValorAtual += valorAtual;
-
-                let row = tabelaBody.insertRow();
-                const moedaCell = row.insertCell(0);
-                moedaCell.innerHTML = `<a href="#" onclick="abrirModalCompras('${moeda}')">${moeda}</a>`;
-                row.insertCell(1).textContent = quantidade.toFixed(6);
-                row.insertCell(2).textContent = `R$ ${valorTotalInvestido.toFixed(2)}`;
-                row.insertCell(3).textContent = `R$ ${valorAtual.toFixed(2)}`;
-                row.insertCell(4).textContent = `R$ ${precoMedio.toFixed(2)}`;
-                row.insertCell(5).textContent = precoAtual ? `R$ ${precoAtual.toFixed(2)}` : "N/A";
-                row.insertCell(6).textContent = `R$ ${alertaPreco.toFixed(2)}`;
-                row.insertCell(7).textContent = ganhoPerda;
-            });
-
-            // Atualizar resumo total investido e valor atual
-            totalInvestidoResumo.textContent = `Total Investido: R$ ${totalGeralInvestido.toFixed(2)}`;
-            totalValorAtualResumo.textContent = `Valor Total Atual: R$ ${totalValorAtual.toFixed(2)}`;
-        } catch (error) {
-            console.log("Erro ao renderizar o dashboard:", error);
+        if (dashboardData.length === 0) {
+            let row = tabelaBody.insertRow();
+            let cell = row.insertCell(0);
+            cell.colSpan = 8;
+            cell.textContent = "Nenhuma compra registrada.";
+            cell.style.textAlign = "center";
+            totalInvestidoResumo.textContent = "Total Investido: R$ 0,00";
+            totalValorAtualResumo.textContent = "Valor Atual: R$ 0,00";
+            return;
         }
-    }, 100);
+
+        let totalGeralInvestido = 0;
+        let totalValorAtual = 0;
+
+        dashboardData.forEach(data => {
+            const { moeda, quantidade, valorTotalInvestido, valorAtual, precoMedio, precoAtual, alertaPreco, ganhoPerda } = data;
+
+            totalGeralInvestido += valorTotalInvestido;
+            totalValorAtual += valorAtual;
+
+            let row = tabelaBody.insertRow();
+            const moedaCell = row.insertCell(0);
+            moedaCell.innerHTML = `<a href="#" onclick="abrirModalCompras('${moeda}')">${moeda}</a>`;
+            row.insertCell(1).textContent = quantidade.toFixed(6);
+            row.insertCell(2).textContent = `R$ ${valorTotalInvestido.toFixed(2)}`;
+            row.insertCell(3).textContent = `R$ ${valorAtual.toFixed(2)}`;
+            row.insertCell(4).textContent = `R$ ${precoMedio.toFixed(2)}`;
+            row.insertCell(5).textContent = precoAtual ? `R$ ${precoAtual.toFixed(2)}` : "N/A";
+            row.insertCell(6).textContent = `R$ ${alertaPreco.toFixed(2)}`;
+            row.insertCell(7).textContent = ganhoPerda;
+        });
+
+        // Atualizar resumo total investido e valor atual
+        totalInvestidoResumo.textContent = `Total Investido: R$ ${totalGeralInvestido.toFixed(2)}`;
+        totalValorAtualResumo.textContent = `Valor Total Atual: R$ ${totalValorAtual.toFixed(2)}`;
+    } catch (error) {
+        console.log("Erro ao renderizar o dashboard:", error);
+    }
 }

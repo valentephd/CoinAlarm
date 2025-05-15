@@ -70,49 +70,6 @@ function carregarConteudo(route) {
         });
 }
 
-
-/* OLD FUNCTION
-function cadastrarAlarme() {
-    const codeCripto = document.getElementById('codeCripto').value
-    const targetValue = document.getElementById('targetValue').value
-
-    console.log("Moeda: ", codeCripto)
-    console.log("Valor Alvo (BRL): ", targetValue)
-
-    if(!codeCripto || !targetValue){
-        alert("Preencha todos os campos para gerar o alarme !")
-        return
-    }
-
-    const alarme = {
-        id: gerarIdSequencial(),
-        codigoMoeda: codeCripto,
-        valorAlvo: targetValue
-    }
-
-    const alarmesExistentes = JSON.parse(localStorage.getItem('alarmes')) || []
-    alarmesExistentes.push(alarme)
-    localStorage.setItem('alarmes', JSON.stringify(alarmesExistentes))
-    console.log("Alarme cadastrado:", alarme)
-    alert(`Alarme para ${codeCripto} com valor de R$ ${targetValue} cadastrado com sucesso!`)
-    exibirAlarmes()
-}
-
-
-function gerarIdSequencial() {
-    const alarmesExistentes = JSON.parse(localStorage.getItem('alarmes')) || []
-    return alarmesExistentes.length ? alarmesExistentes[alarmesExistentes.length - 1].id + 1 : 1
-}
-
-function removerAlarme(id) {
-    const alarmesExistentes = JSON.parse(localStorage.getItem('alarmes')) || []
-    const alarmesAtualizados = alarmesExistentes.filter(alarme => alarme.id !== id)
-    localStorage.setItem('alarmes', JSON.stringify(alarmesAtualizados))
-    exibirAlarmes()
-}
-    */
-
-// Função para verificar se algum alarme foi atingido
 function verificarAlarmes() {
     const alarmes = JSON.parse(localStorage.getItem('alarmes')) || [];
 
@@ -151,10 +108,11 @@ function verificarAlarmes() {
     });
 }
 
-export const dashboardData = [];
+export var dashboardData = [];
 
 export async function tableOverviewCoins(valoresCriptosAtualizados) {
-    console.log('Executando tableOverviewCoins .....')
+    dashboardData = [];
+
     setTimeout(() => {
         const cryptoPurchases = JSON.parse(localStorage.getItem('cryptoPurchases')) || [];
         //console.log('cryptoPurchases ==> ', cryptoPurchases);
@@ -236,9 +194,8 @@ export async function tableOverviewCoins(valoresCriptosAtualizados) {
 
         })
 
-        console.log('dashboardData ====> ', dashboardData);
+        //console.log('dashboardData ====> ', dashboardData);
+        renderDashboard();
     }, 800);
-
-    renderDashboard()
 }
 
