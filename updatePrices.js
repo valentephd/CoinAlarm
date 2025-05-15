@@ -1,18 +1,8 @@
-import { precosCriptos } from './app.js';
+import { precosCriptos, tableOverviewCoins } from './app.js';
 import { renderDashboard } from './components/dashboard/dashboard.js';
 
-export function updatePrices(){
-    console.log('updatePrices sendo chamado aqui....')
-
-    document.addEventListener("DOMContentLoaded", function () {
-        console.log('DOMContentLoaded ....')
-        atualizarPrecos();
-        document.getElementById("atualizarTabelaBtn").addEventListener("click", atualizarPrecos);
-    });    
-}
-
-function atualizarPrecos() {
-    console.log('updatePrices .... in atualizarPrecos')
+export async function updatePrices() {
+    console.log('updatePrices .... in updatePrices')
     // Obtém lista de códigos de moedas do localStorage
     const currencies = JSON.parse(localStorage.getItem('availableCurrencies')) || [];
     if (!Array.isArray(currencies) || currencies.length === 0) {
@@ -20,18 +10,12 @@ function atualizarPrecos() {
         return;
     }
 
-    // Reconstrói o array global com valorInicial zero
-    var precosCriptos = currencies.map(code => ({ codigoMoeda: code, valorAtual: 0 }));
-
-    const promises = precosCriptos.map(cripto => getPrecoBRL(cripto.codigoMoeda));
     
-    // Aguarda todas as promessas serem resolvidas
-    Promise.all(promises).then(() => {
-        // Atualiza a tabela após todos os preços serem carregados
-        if (typeof atualizarTabelaCryptos === 'function') {
-            atualizarTabelaCryptos();
-        }
-    });
+    await precosCriptos.map(cripto => getPrecoBRL(cripto.codigoMoeda))
+    //console.log('precosCriptos in updatePrices ===> ', precosCriptos)
+    const novosValores = Array.from(precosCriptos)
+    console.log('novosValores in updatePrices ===> ',  novosValores)
+    tableOverviewCoins(novosValores);
 }
 
 // Busca o preço da moeda na API do Mercado Bitcoin
@@ -66,16 +50,14 @@ async function getPrecoBRL(codigoMoeda) {
             verificarAlarmes();
         }
         
-        console.log('Renderizando dashboard... ');
-        renderDashboard();
     } catch (error) {
         console.error(`❌ Erro ao buscar ${codigoMoeda}-BRL:`, error);
     }
 }
 
-// Chama atualizarPrecos() assim que a página carregar e dispara o intervalo
+// Chama updatePrices() assim que a página carregar e dispara o intervalo
 document.addEventListener('DOMContentLoaded', () => {
-    atualizarPrecos();
-    setInterval(atualizarPrecos, 300 * 1000);
+    //updatePrices();
+    setInterval(updatePrices, 300 * 1000);
     console.log('Hora ===>>> ', new Date())
 });

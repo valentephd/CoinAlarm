@@ -75,10 +75,12 @@ function gerarIdCompra() {
 // Inicializar eventos
 document.addEventListener("DOMContentLoaded", () => {
     populateCurrencySelect();
+    /*
     const cadastrarCompraBtn = document.getElementById('cadastrarCompraBtn');
     if (cadastrarCompraBtn) {
         cadastrarCompraBtn.addEventListener('click', cadastrarCompra);
     } else {
         console.error('Botão "Cadastrar Compra" não encontrado no DOM.');
     }
+    */
 });

@@ -1,8 +1,9 @@
-import { renderDashboard } from './components/dashboard/dashboard.js'; // Importar renderDashboard
+import { renderDashboard } from './components/dashboard/dashboard.js';
+import { updatePrices } from './updatePrices.js';
 
 const somAlarme = new Audio('assets/alarme.mp3');
 
-export const precosCriptos = [
+export var precosCriptos = [
     { codigoMoeda: "BTC", valorAtual: 0 },
     { codigoMoeda: "ETH", valorAtual: 0 },
     { codigoMoeda: "LTC", valorAtual: 0 },
@@ -10,6 +11,18 @@ export const precosCriptos = [
     { codigoMoeda: "DOT", valorAtual: 0 },
     { codigoMoeda: "AAVE", valorAtual: 0 }
 ];
+
+// Inicializar a aplicação
+window.onload = async () => {
+    await updatePrices();
+    // console.log('Vai aguardar 0,5 segundo para executar o resto do onload')
+    setTimeout(() => {
+        carregarComponentesFixos();
+        carregarConteudo('dashboard');
+    }, 500);
+
+    
+};
 
 // Carregar componentes fixos (header, menu, footer)
 function carregarComponentesFixos() {
@@ -45,8 +58,10 @@ function carregarConteudo(route) {
             const content = document.getElementById('content');
             content.style.display = 'block'; // Garantir que o conteúdo seja exibido
             content.innerHTML = html;
+
             if (route === 'dashboard') {
-                renderDashboard(); // Renderizar o dashboard apenas quando necessário
+                // Aguarde o carregamento do HTML antes de executar o JS
+                renderDashboard();
             }
         })
         .catch(error => {
@@ -55,34 +70,8 @@ function carregarConteudo(route) {
         });
 }
 
-// Inicializar a aplicação
-window.onload = () => {
-    carregarComponentesFixos();
-    carregarConteudo('dashboard'); // Chamar carregarConteudo para carregar o dashboard
-};
 
-// Código comentado que não será mais executado diretamente
-/*
-function exibirAlarmes() {
-    const alarmes = JSON.parse(localStorage.getItem('alarmes')) || [];
-    const listaAlarmes = document.getElementById('listaAlarmes');
-    listaAlarmes.innerHTML = '';
-
-    alarmes.forEach(alarme => {
-        const alarmeItem = document.createElement('li');
-        alarmeItem.id = `alarme-${alarme.id}`;
-        alarmeItem.textContent = `Moeda: ${alarme.codigoMoeda}, Valor Alvo: R$ ${alarme.valorAlvo}`;
-        const removerBtn = document.createElement('button');
-        removerBtn.textContent = 'Remover';
-        removerBtn.style.marginLeft = '10px';
-        removerBtn.onclick = () => removerAlarme(alarme.id);
-        alarmeItem.appendChild(removerBtn);
-        listaAlarmes.appendChild(alarmeItem);
-    });
-    verificarAlarmes();
-}
-*/
-
+/* OLD FUNCTION
 function cadastrarAlarme() {
     const codeCripto = document.getElementById('codeCripto').value
     const targetValue = document.getElementById('targetValue').value
@@ -109,6 +98,7 @@ function cadastrarAlarme() {
     exibirAlarmes()
 }
 
+
 function gerarIdSequencial() {
     const alarmesExistentes = JSON.parse(localStorage.getItem('alarmes')) || []
     return alarmesExistentes.length ? alarmesExistentes[alarmesExistentes.length - 1].id + 1 : 1
@@ -120,6 +110,7 @@ function removerAlarme(id) {
     localStorage.setItem('alarmes', JSON.stringify(alarmesAtualizados))
     exibirAlarmes()
 }
+    */
 
 // Função para verificar se algum alarme foi atingido
 function verificarAlarmes() {
@@ -159,3 +150,95 @@ function verificarAlarmes() {
         }
     });
 }
+
+export const dashboardData = [];
+
+export async function tableOverviewCoins(valoresCriptosAtualizados) {
+    console.log('Executando tableOverviewCoins .....')
+    setTimeout(() => {
+        const cryptoPurchases = JSON.parse(localStorage.getItem('cryptoPurchases')) || [];
+        //console.log('cryptoPurchases ==> ', cryptoPurchases);
+        const cryptoSales = JSON.parse(localStorage.getItem('cryptoSales')) || [];
+        //console.log('cryptoSales ==> ', cryptoSales);
+
+        // Cria um set com os códigos das moedas
+        const setCodigoMoedas = new Set();
+        cryptoPurchases.map(item => {
+            let codigoMoeda = item['moeda'];
+            setCodigoMoedas.add(codigoMoeda);
+        });
+
+        setCodigoMoedas.forEach( moeda => {
+            //console.log(moeda)
+
+            const compras = cryptoPurchases.filter(item => item.moeda == moeda)
+            const vendas = cryptoSales.filter(item => item.moeda == moeda)
+            //console.log('compras ::: ', compras)
+            //console.log('vendas ::: ', vendas)
+
+            // Colunas do dashboard
+            let quantidade = 0
+            let valorTotalInvestido = 0
+            let valorAtualizadoMoeda = 0
+
+            // Quantidade de cada Moeda (compras - vendas)
+            quantidade += compras.reduce((acc, item) => acc + item.quantidade, 0)
+            quantidade -= vendas.reduce((acc, item) => acc + item.quantidade, 0)
+
+            // Valor Total de Cada Moeda (compras - vendas)
+            valorTotalInvestido += compras.reduce((acc, item) => acc + item.valorTotal, 0)
+            valorTotalInvestido -= vendas.reduce((acc, item) => acc + item.valorTotal, 0)
+
+            // Define Valor Atual (quantidade de moeda x precosCripto) para cada Moeda
+            let precoCripto = valoresCriptosAtualizados.find( item => item.codigoMoeda == moeda)
+            valorAtualizadoMoeda = precoCripto.valorAtual
+            let valorAtual = quantidade * valorAtualizadoMoeda
+
+            // Define o preço médio baseado na quantidade atual de moeda e o valor de compra que restou (precisa subitrair do que foi vendido)
+            let quantidadeRestante = quantidade;
+            let valorRestante = 0;
+
+            // Ordena as compras por ordem de registro (FIFO - Primeiro a entrar, primeiro a sair)
+            compras.sort((a, b) => a.data - b.data);
+
+            for (const compra of compras) {
+                if (quantidadeRestante <= 0) break;
+
+                const quantidadeConsiderada = Math.min(compra.quantidade, quantidadeRestante);
+                valorRestante += quantidadeConsiderada * (compra.valorTotal / compra.quantidade);
+                quantidadeRestante -= quantidadeConsiderada;
+            }
+
+            const precoMedio = quantidade > 0 ? valorRestante / quantidade : 0;
+
+            const gainLoss = valorAtual - valorTotalInvestido;
+            const gainLossPercent = valorTotalInvestido ? (gainLoss / valorTotalInvestido) * 100 : 0;
+
+            const ganhoPerda = !valorAtualizadoMoeda 
+                ? "N/A" 
+                : (gainLoss > 0 
+                    ? `+R$ ${gainLoss.toFixed(2)} (+${gainLossPercent.toFixed(2)}%)` 
+                    : gainLoss < 0 
+                        ? `-R$ ${Math.abs(gainLoss).toFixed(2)} (${gainLossPercent.toFixed(2)}%)` 
+                        : `R$ 0.00 (0.00%)`);
+
+            const data = {
+                "moeda": moeda,
+                "quantidade": quantidade,
+                "valorTotalInvestido": valorTotalInvestido,
+                "valorAtual": Number.parseFloat(valorAtual.toFixed(2)),
+                "precoMedio": Number.parseFloat(precoMedio.toFixed(2)),
+                "precoAtual": precoCripto.valorAtual,
+                "alertaPreco": Number.parseFloat((precoCripto.valorAtual * 1.1).toFixed(2)),
+                "ganhoPerda": ganhoPerda
+            };
+            dashboardData.push(data);
+
+        })
+
+        console.log('dashboardData ====> ', dashboardData);
+    }, 800);
+
+    renderDashboard()
+}
+
