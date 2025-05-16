@@ -1,5 +1,4 @@
 import { precosCriptos, tableOverviewCoins } from './app.js';
-import { renderDashboard } from './components/dashboard/dashboard.js';
 
 export async function updatePrices() {
     console.log('Hora ===>>> ', new Date())
@@ -57,5 +56,5 @@ async function getPrecoBRL(codigoMoeda) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    setInterval(updatePrices, 30 * 1000);
+    setInterval(updatePrices, 120 * 1000);
 });

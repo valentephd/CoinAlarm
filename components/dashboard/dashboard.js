@@ -1,6 +1,7 @@
 import { precosCriptos, dashboardData } from '../../app.js';
 
 export function renderDashboard() {
+    console.log('Chamou o dashboard')
     try {
         const tabelaBody = document.querySelector("#cryptoTable tbody");
         if (!tabelaBody) {
@@ -35,7 +36,7 @@ export function renderDashboard() {
             let row = tabelaBody.insertRow();
             const moedaCell = row.insertCell(0);
             moedaCell.innerHTML = `<a href="#" onclick="abrirModalCompras('${moeda}')">${moeda}</a>`;
-            row.insertCell(1).textContent = quantidade.toFixed(6);
+            row.insertCell(1).textContent = quantidade.toFixed(8);
             row.insertCell(2).textContent = `R$ ${valorTotalInvestido.toFixed(2)}`;
             row.insertCell(3).textContent = `R$ ${valorAtual.toFixed(2)}`;
             row.insertCell(4).textContent = `R$ ${precoMedio.toFixed(2)}`;

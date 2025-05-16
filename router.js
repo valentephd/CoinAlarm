@@ -24,7 +24,7 @@ function loadComponent(hash) {
             content.style.display = "block";
             content.innerHTML = html;
             if (hash === "dashboard") {
-                //renderDashboard();
+                renderDashboard();
             } else if (hash === "cryptoPurchase") {
                 populateCurrencySelect();
             } else if (hash === "cryptoSale") {
