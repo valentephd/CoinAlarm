@@ -22,7 +22,7 @@ export function populateCurrencySelect() {
     });
 }
 
-export function cadastrarCompra() {
+window.cadastrarCompra = function cadastrarCompra() {
     console.log('func cadastrarCompra ...')
     const currency = document.getElementById('currencySelect').value;
     const quantityValue = document.getElementById('quantityInput').value;
@@ -55,7 +55,6 @@ export function cadastrarCompra() {
         precoPorUnidade: pricePerUnit
     };
 
-    // Corrigido: Garantir que a chave correta seja usada no LocalStorage
     let comprasExistentes = JSON.parse(localStorage.getItem('cryptoPurchases')) || [];
     comprasExistentes.push(compra);
     localStorage.setItem('cryptoPurchases', JSON.stringify(comprasExistentes));
@@ -75,12 +74,4 @@ function gerarIdCompra() {
 // Inicializar eventos
 document.addEventListener("DOMContentLoaded", () => {
     populateCurrencySelect();
-    /*
-    const cadastrarCompraBtn = document.getElementById('cadastrarCompraBtn');
-    if (cadastrarCompraBtn) {
-        cadastrarCompraBtn.addEventListener('click', cadastrarCompra);
-    } else {
-        console.error('Botão "Cadastrar Compra" não encontrado no DOM.');
-    }
-    */
 });

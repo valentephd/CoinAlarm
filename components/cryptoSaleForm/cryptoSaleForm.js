@@ -22,7 +22,8 @@ export function populateSaleCurrencySelect() {
     });
 }
 
-export function cadastrarVenda() {
+window.cadastrarVenda = function cadastrarVenda() {
+    console.log('Chamou o cadastrar venda ....')
     const currency = document.getElementById("currencySelect").value;
     const quantityValue = document.getElementById("quantityInput").value;
     const saleDate = document.getElementById("saleDateInput").value;
@@ -54,9 +55,15 @@ export function cadastrarVenda() {
         precoPorUnidade: pricePerUnit
     };
 
+    console.log('Registro de venda :::', venda)
+
     let vendasExistentes = JSON.parse(localStorage.getItem("cryptoSales")) || [];
+
+    console.log('[LOCAL STORAGE] cryptoSales ===> ', vendasExistentes);
     vendasExistentes.push(venda);
     localStorage.setItem("cryptoSales", JSON.stringify(vendasExistentes));
+
+    console.log('get new localStorage cryptoSales => ', JSON.parse(localStorage.getItem("cryptoSales")))
 
     document.getElementById("saleResult").textContent =
         "Venda cadastrada: " + currency + ", " + quantity + " unidades, valor total R$ " + total.toFixed(2) +
