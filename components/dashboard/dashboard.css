@@ -41,6 +41,13 @@
     margin-right: 2rem;
 }
 
+.modalCoinDetailContent {
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    display: none;
+}
+
 @media screen and (max-width: 970px) {
     #content {
         width: 970px; /* Não diminuir mais o tamanho do conteúdo */

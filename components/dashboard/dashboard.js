@@ -1,4 +1,5 @@
 import { precosCriptos, dashboardData } from '../../app.js';
+import { renderModalCoinDetail } from '../modalCoinDetail/modalCoinDetail.js';
 
 export function renderDashboard() {
     console.log('Chamou o dashboard')
@@ -35,7 +36,8 @@ export function renderDashboard() {
 
             let row = tabelaBody.insertRow();
             const moedaCell = row.insertCell(0);
-            moedaCell.innerHTML = `<a href="#" onclick="abrirModalCompras('${moeda}')">${moeda}</a>`;
+            // Altera o link para não redirecionar e apenas abrir o modal
+            moedaCell.innerHTML = `<a href="#" class="coin-link">${moeda}</a>`;
             row.insertCell(1).textContent = quantidade.toFixed(8);
             row.insertCell(2).textContent = `R$ ${valorTotalInvestido.toFixed(2)}`;
             row.insertCell(3).textContent = `R$ ${valorAtual.toFixed(2)}`;
@@ -68,7 +70,25 @@ export function renderDashboard() {
         ganhoPerdaResumo.textContent += ` (${porcentagemDiferenca.toFixed(2)}%)`;
         ganhoPerdaResumo.style.color = (diferencaTotal > 0) ? "blue" : (diferencaTotal < 0) ? "red" : "black";
 
+        // Adiciona o event listener para todos os links de moeda
+        setTimeout(() => {
+            document.querySelectorAll('.coin-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openDashboardCoin(this.textContent);
+                });
+            });
+        }, 0);
+
     } catch (error) {
         console.log("Erro ao renderizar o dashboard:", error);
     }
 }
+
+function openDashboardCoin(moeda){
+    console.log('Moeda: ==> ', moeda);
+    // Carrega o modal
+    renderModalCoinDetail(moeda);
+}
+
+window.openDashboardCoin = openDashboardCoin;
