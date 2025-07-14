@@ -48,6 +48,19 @@
     display: none;
 }
 
+.arrow-up {
+    color: #1ca91c;
+    font-weight: bold;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+.arrow-down {
+    color: #e53935;
+    font-weight: bold;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
 @media screen and (max-width: 970px) {
     #content {
         width: 970px; /* Não diminuir mais o tamanho do conteúdo */

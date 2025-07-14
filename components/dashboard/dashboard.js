@@ -44,7 +44,17 @@ export function renderDashboard() {
             row.insertCell(4).textContent = `R$ ${precoMedio.toFixed(2)}`;
             row.insertCell(5).textContent = precoAtual ? `R$ ${precoAtual.toFixed(2)}` : "N/A";
             row.insertCell(6).textContent = `R$ ${alertaPreco.toFixed(2)}`;
-            row.insertCell(7).textContent = ganhoPerda;
+            
+            // Ganho/Perda com seta e cor
+            const ganhoPerdaCell = row.insertCell(7);
+            let valorGanhoPerda = typeof ganhoPerda === "number" ? ganhoPerda : parseFloat(ganhoPerda.replace(/[^\d.-]/g, ''));
+            if (valorGanhoPerda > 0) {
+                ganhoPerdaCell.innerHTML = `<span class="arrow-up">▲</span> R$ ${valorGanhoPerda.toFixed(2)}`;
+            } else if (valorGanhoPerda < 0) {
+                ganhoPerdaCell.innerHTML = `<span class="arrow-down">▼</span> R$ ${valorGanhoPerda.toFixed(2)}`;
+            } else {
+                ganhoPerdaCell.innerHTML = `<span>R$ ${valorGanhoPerda.toFixed(2)}</span>`;
+            }
         });
 
         // Atualizar resumo total investido e valor atual
