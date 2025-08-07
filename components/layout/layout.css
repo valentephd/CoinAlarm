@@ -18,7 +18,8 @@ body {
 }
 
 #sideMenu.menu-expanded + #menuContainer + #mainContent {
-    margin-left: 18%; /* Adjust for expanded menu */
+    margin-left: 14.4%;  /* Adjust for expanded menu */
+    transition: color 0.45s;
 }
 
 #sideMenu.menu-compact + #menuContainer + #mainContent {

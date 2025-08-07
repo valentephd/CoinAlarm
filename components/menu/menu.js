@@ -13,7 +13,7 @@ function toggleMenu() {
   } else {
     sideMenu.classList.remove("menu-compact");
     sideMenu.classList.add("menu-expanded");
-    mainContent.style.marginLeft = "18%"; // Adjust for expanded menu
+    mainContent.style.marginLeft = "14.4%"; // Adjust for expanded menu
     localStorage.setItem("menuStyle", "expanded");
   }
 }
@@ -28,7 +28,7 @@ function initializeMenu() {
   if (savedStyle === "expanded") {
     sideMenu.classList.add("menu-expanded");
     sideMenu.classList.remove("menu-compact");
-    mainContent.style.marginLeft = "18%"; // Adjust for expanded menu
+    mainContent.style.marginLeft = "14.4%"; // Adjust for expanded menu
   } else {
     sideMenu.classList.add("menu-compact");
     sideMenu.classList.remove("menu-expanded");
