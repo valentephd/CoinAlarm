@@ -28,7 +28,9 @@ export function renderDashboard() {
         let totalGeralInvestido = 0;
         let totalValorAtual = 0;
 
-        dashboardData.forEach(data => {
+        dashboardData
+        .filter(data => data.quantidade > 0) // <-- Adicionado filtro para não exibir moedas com quantidade zero
+        .forEach(data => {
             const { moeda, quantidade, valorTotalInvestido, valorAtual, precoMedio, precoAtual, alertaPreco, ganhoPerda } = data;
 
             totalGeralInvestido += valorTotalInvestido;
